@@ -1,17 +1,32 @@
+/* global Handlebars, utils, dataSource */
 {
   'use strict';
 
-  const templates = Handlebars.compile(document.querySelector('#template-book').innerHTML);
+  const select = {
+    templateOf: {
+      books: '#template-book'
+    },
 
-  const listOfBooks = document.querySelector('books-list');
+    list: {
+      books: '.books-list'
+    },
+  };
+
+
+  const templates = Handlebars.compile(document.querySelector(select.templateOf.books).innerHTML);
+
+  const listOfBooks = document.querySelector(select.list.books);
 
   function render() {
-    for (const parameter of dataSource.books) {
-      parameter
+    for (let parameters of dataSource.books) {
+      const generateHTML = templates(parameters);
+
+      const codeHTML = utils.createDOMFromHTML(generateHTML);
+
+      listOfBooks.appendChild(codeHTML)
+
     }
   }
-
-
-
+  render();
 
 }

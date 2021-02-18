@@ -130,7 +130,12 @@
       return background;
     }
   }
-  const app = new BooksList();
+  const app = {
+    init: function () {
+      new BooksList();
+    }
+  };
+  app.init();
 }
 
 
